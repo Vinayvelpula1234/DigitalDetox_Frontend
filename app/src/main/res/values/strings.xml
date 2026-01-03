@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DigitalDetox</string>
+    <string name="welcome_to_digital_detox">Welcome to Digital Detox</string>
+    <string name="break_free_from_digital_addiction_and_reclaim_your_time">Break free from digital addiction and reclaim your time</string>
+    <string name="focus_better">Focus Better</string>
+    <string name="block_distractions_and_stay_productive">Block distractions and stay productive</string>
+    <string name="ai_insights">AI Insights</string>
+    <string name="smart_predictions_for_better_habits">Smart predictions for better habits</string>
+    <string name="healthier_life">Healthier Life</string>
+    <string name="reduce_screen_time_improve_wellness">Reduce screen time, improve wellness</string>
+    <string name="get_started">Get Started</string>
+    <string name="logo_description">Digital Detox App Logo</string>
+    <string name="focus_icon_description">Focus Better Icon</string>
+    <string name="ai_icon_description">AI Insights Icon</string>
+    <string name="healthier_life_icon_description">Healthier Life Icon</string>
+</resources>
