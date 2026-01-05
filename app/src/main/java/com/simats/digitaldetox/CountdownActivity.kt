@@ -33,6 +33,9 @@ class CountdownActivity : AppCompatActivity() {
 
         val duration = intent.getIntExtra("DURATION", 25)
         val sessionGoal = intent.getStringExtra("SESSION_GOAL")
+        
+        // Confirm duration to user
+        Toast.makeText(this, "Starting $duration minute session", Toast.LENGTH_SHORT).show()
 
         sessionGoalText.text = sessionGoal
         timeLeftInMillis = (duration * 60 * 1000).toLong()
@@ -86,6 +89,6 @@ class CountdownActivity : AppCompatActivity() {
         timer?.cancel()
         isTimerRunning = false
         Toast.makeText(this, "Session Ended", Toast.LENGTH_SHORT).show()
-        onBackPressed()
+        onBackPressedDispatcher.onBackPressed()
     }
 }

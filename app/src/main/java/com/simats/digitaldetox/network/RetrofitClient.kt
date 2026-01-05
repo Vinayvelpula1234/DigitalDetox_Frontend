@@ -1,10 +1,10 @@
-package com.simats.digitaldetox
+package com.simats.digitaldetox.network
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
-    private const val BASE_URL = "https://tsp8056h-80.inc1.devtunnels.ms/repo/Digital_detox/"
+    private const val BASE_URL = "http://10.155.157.71/Digital_detox/backend/"
 
     val instance: ApiService by lazy {
         val retrofit = Retrofit.Builder()

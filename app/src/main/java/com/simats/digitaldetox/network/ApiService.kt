@@ -1,5 +1,9 @@
-package com.simats.digitaldetox
+package com.simats.digitaldetox.network
 
+import com.simats.digitaldetox.LoginResponse
+import com.simats.digitaldetox.Profile
+import com.simats.digitaldetox.Rewards
+import com.simats.digitaldetox.UpdateProfileResponse
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -14,7 +18,7 @@ interface ApiService {
         @Field("name") name: String,
         @Field("email") email: String,
         @Field("password") password: String
-    ): Call<LoginResponse> // Use LoginResponse for both
+    ): Call<LoginResponse>
 
     @FormUrlEncoded
     @POST("login.php")
@@ -33,4 +37,7 @@ interface ApiService {
         @Field("name") name: String,
         @Field("language") language: String
     ): Call<UpdateProfileResponse>
+
+    @GET("get_rewards.php")
+    fun getRewards(@Query("user_id") userId: Int): Call<Rewards>
 }

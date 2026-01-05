@@ -8,6 +8,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.simats.digitaldetox.network.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -60,12 +61,15 @@ class CreateAccountActivity : AppCompatActivity() {
                                 Toast.makeText(this@CreateAccountActivity, loginResponse?.message ?: "Registration failed", Toast.LENGTH_SHORT).show()
                             }
                         } else {
-                            Toast.makeText(this@CreateAccountActivity, "Registration failed", Toast.LENGTH_SHORT).show()
+                            val errorBody = response.errorBody()?.string()
+                            android.util.Log.e("DetoxDebug", "Registration error: ${response.code()} - $errorBody")
+                            Toast.makeText(this@CreateAccountActivity, "Server error: ${response.code()}", Toast.LENGTH_SHORT).show()
                         }
                     }
 
                     override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                        Toast.makeText(this@CreateAccountActivity, "An error occurred: ${t.message}", Toast.LENGTH_SHORT).show()
+                        android.util.Log.e("DetoxDebug", "Network failure", t)
+                        Toast.makeText(this@CreateAccountActivity, "Network error: ${t.localizedMessage}", Toast.LENGTH_LONG).show()
                     }
                 })
         }

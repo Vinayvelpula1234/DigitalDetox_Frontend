@@ -581,6 +581,7 @@
         </androidx.cardview.widget.CardView>
 
         <Button
+            android:id="@+id/view_daily_challenges_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
@@ -591,6 +592,7 @@
             app:tint="@android:color/white"/>
 
         <Button
+            android:id="@+id/btn_track_progress"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -12,7 +12,16 @@ class AnalyticsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_analytics, container, false)
+        val view = inflater.inflate(R.layout.fragment_analytics, container, false)
+        
+        view.findViewById<android.widget.TextView>(R.id.view_all_apps).setOnClickListener {
+            startActivity(android.content.Intent(requireContext(), AppWiseUsageDetailActivity::class.java))
+        }
+
+        view.findViewById<androidx.cardview.widget.CardView>(R.id.daily_report_card).setOnClickListener {
+            startActivity(android.content.Intent(requireContext(), AppWiseUsageDetailActivity::class.java))
+        }
+
+        return view
     }
 }

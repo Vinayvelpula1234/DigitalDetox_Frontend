@@ -19,38 +19,79 @@ class FocusSessionActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        toolbar.setNavigationOnClickListener { onBackPressed() }
+        toolbar.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
 
-        val duration15 = findViewById<Button>(R.id.duration_15)
-        val duration25 = findViewById<Button>(R.id.duration_25)
-        val duration45 = findViewById<Button>(R.id.duration_45)
-        val duration60 = findViewById<Button>(R.id.duration_60)
-        val duration90 = findViewById<Button>(R.id.duration_90)
         val sessionGoalInput = findViewById<EditText>(R.id.session_goal_input)
         val startFocusSessionButton = findViewById<Button>(R.id.start_focus_session_button)
 
-        val durationButtons = mapOf(
-            duration15 to 15,
-            duration25 to 25,
-            duration45 to 45,
-            duration60 to 60,
-            duration90 to 90
-        )
+        val etDurationInput = findViewById<android.widget.EditText>(R.id.et_duration_input)
+        val sliderDuration = findViewById<com.google.android.material.slider.Slider>(R.id.slider_duration)
 
-        durationButtons.keys.forEach { button ->
-            button.setOnClickListener {
-                durationButtons.keys.forEach { it.isSelected = false }
-                button.isSelected = true
-                selectedDuration = durationButtons[button]!!
+        // Function to update UI safely without triggering loops
+        fun updateDurationFromSlider(duration: Int) {
+            selectedDuration = duration
+            if (etDurationInput.text.toString() != duration.toString()) {
+                etDurationInput.setText(duration.toString())
+                etDurationInput.setSelection(etDurationInput.text.length)
             }
         }
 
-        // Select 25 by default
-        duration25.isSelected = true
+        fun updateDurationFromInput(duration: Int) {
+            var validDuration = duration
+            if (validDuration < 1) validDuration = 1
+            if (validDuration > 180) validDuration = 180
+            
+            selectedDuration = validDuration
+            sliderDuration.value = validDuration.toFloat()
+        }
+
+        // Slider Listener
+        sliderDuration.addOnChangeListener { _, value, fromUser ->
+            if (fromUser) {
+                updateDurationFromSlider(value.toInt())
+            }
+        }
+
+        // EditText Listener
+        etDurationInput.addTextChangedListener(object : android.text.TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: android.text.Editable?) {
+                if (s.isNullOrEmpty()) return
+                val input = s.toString().toIntOrNull()
+                if (input != null && sliderDuration.value.toInt() != input) {
+                    // Only update if value actually changed to avoid loop
+                     // We don'tclamp immediately while typing to allow "1" -> "15" without it snapping to 5
+                     // But we should clamp for the slider visual
+                     var sliderValue = input.toFloat()
+                     if (sliderValue < 1f) sliderValue = 1f
+                     if (sliderValue > 180f) sliderValue = 180f
+                     sliderDuration.value = sliderValue
+                     selectedDuration = input // Allow the actual value, but clamp execution time later if needed
+                }
+            }
+        })
+
+        // Validation on focus lost
+        etDurationInput.setOnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus) {
+                val input = etDurationInput.text.toString().toIntOrNull() ?: 25
+                updateDurationFromInput(input)
+                etDurationInput.setText(selectedDuration.toString())
+            }
+        }
 
         startFocusSessionButton.setOnClickListener {
+            // Read directly from input to ensure WYSIWYG (What You See Is What You Get)
+            val inputStr = etDurationInput.text.toString()
+            var finalDuration = inputStr.toIntOrNull() ?: 25
+            
+            // Clamp value
+            if (finalDuration < 1) finalDuration = 1
+            if (finalDuration > 180) finalDuration = 180
+            
             val intent = Intent(this, CountdownActivity::class.java)
-            intent.putExtra("DURATION", selectedDuration)
+            intent.putExtra("DURATION", finalDuration)
             intent.putExtra("SESSION_GOAL", sessionGoalInput.text.toString())
             startActivity(intent)
         }

@@ -13,6 +13,20 @@ class StreakProgressActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        toolbar.setNavigationOnClickListener { onBackPressed() }
+        toolbar.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
+
+        findViewById<android.widget.Button>(R.id.view_daily_challenges_button).setOnClickListener {
+            startActivity(android.content.Intent(this, DailyChallengesActivity::class.java))
+        }
+
+        findViewById<android.widget.Button>(R.id.btn_track_progress).setOnClickListener {
+            android.util.Log.d("StreakProgress", "Track Progress Clicked")
+           try {
+               startActivity(android.content.Intent(this, ProgressTrackingActivity::class.java))
+           } catch (e: Exception) {
+               android.util.Log.e("StreakProgress", "Error starting activity", e)
+               android.widget.Toast.makeText(this, "Error: ${e.message}", android.widget.Toast.LENGTH_LONG).show()
+           }
+        }
     }
 }

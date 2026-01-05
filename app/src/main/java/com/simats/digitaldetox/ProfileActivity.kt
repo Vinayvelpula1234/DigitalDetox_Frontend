@@ -17,7 +17,7 @@ class ProfileActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        toolbar.setNavigationOnClickListener { onBackPressed() }
+        toolbar.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
 
         val sharedPref = getSharedPreferences("DigitalDetoxPrefs", Context.MODE_PRIVATE)
         val userName = sharedPref.getString("USER_NAME", "User")

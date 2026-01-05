@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F9FAFB"
+    tools:context=".BlockByCategoryActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@android:color/white"
+        android:elevation="4dp"
+        app:title="Block by Category"
+        app:titleTextColor="#333333"
+        app:navigationIcon="@drawable/ic_arrow_back" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Purple Info Card -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="#FFF0F5FF"> <!-- Very light purple/pink bg -->
+                
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_light_purple_outline" 
+                    android:padding="16dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_security"
+                        app:tint="#AA00FF"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Quick Blocking"
+                            android:textColor="#333"
+                            android:textStyle="bold"
+                            android:textSize="16sp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Select categories to block multiple related websites at once. This helps you stay focused by eliminating entire categories of distractions."
+                            android:textColor="#666"
+                            android:textSize="13sp"
+                            android:layout_marginTop="4dp"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal"
+                 android:layout_marginBottom="8dp">
+                 <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Categories"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="#333"/>
+                 <LinearLayout
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:orientation="vertical"
+                     android:gravity="end">
+                     <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2"
+                        android:textSize="14sp"
+                        android:textColor="#666"/>
+                     <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="selected"
+                        android:textSize="12sp"
+                        android:textColor="#666"/>
+                 </LinearLayout>
+            </LinearLayout>
+
+            <!-- Social Media (Selected) -->
+            <include layout="@layout/item_category_selected_placeholder_1"/>
+
+            <!-- Entertainment (Selected) -->
+            <include layout="@layout/item_category_selected_placeholder_2"/>
+            
+            <!-- News & Media (Not Selected) -->
+            <include layout="@layout/item_category_unselected_placeholder_1"/>
+            
+            <!-- Shopping (Not Selected) -->
+            <include layout="@layout/item_category_unselected_placeholder_2"/>
+            
+            <!-- Apply Button -->
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Apply Blocking Rules (2 categories)"
+                android:backgroundTint="#111"
+                android:textColor="@android:color/white"
+                android:padding="14dp"
+                app:cornerRadius="8dp"
+                android:layout_marginVertical="16dp"/>
+                
+             <!-- Gaming (Not Selected) -->
+            <include layout="@layout/item_category_unselected_placeholder_3"/>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

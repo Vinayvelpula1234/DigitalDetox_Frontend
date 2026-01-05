@@ -19,7 +19,7 @@ class SelectAlertTypeActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        toolbar.setNavigationOnClickListener { onBackPressed() }
+        toolbar.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
 
         val timeBasedAlertCard = findViewById<CardView>(R.id.time_based_alert_card)
         val scheduleBasedAlertCard = findViewById<CardView>(R.id.schedule_based_alert_card)

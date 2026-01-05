@@ -15,7 +15,7 @@ class VoiceAlertsActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        toolbar.setNavigationOnClickListener { onBackPressed() }
+        toolbar.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
 
         val createNewAlertButton = findViewById<Button>(R.id.create_new_alert_button)
         createNewAlertButton.setOnClickListener {

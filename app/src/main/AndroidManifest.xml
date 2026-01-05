@@ -15,6 +15,12 @@
         android:theme="@style/Theme.DigitalDetox"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".BlockAppsListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AppBlockingActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
@@ -34,6 +40,25 @@
         <activity android:name=".SelectAlertTypeActivity" />
         <activity android:name=".EditProfileActivity" />
         <activity android:name=".AppPreferencesActivity" />
+        <activity android:name=".ForgotPasswordActivity" />
+        <activity android:name=".VerifyCodeActivity" />
+        <activity android:name=".ResetPasswordActivity" />
+        <activity android:name=".PasswordResetSuccessActivity" />
+        <activity android:name=".DailyChallengesActivity" />
+        <activity android:name=".RewardsActivity" />
+        <activity android:name=".DetoxPlansActivity" />
+        <activity android:name=".DetoxPlanDetailActivity" />
+        <activity android:name=".HabitRoadmapActivity" />
+        <activity android:name=".DailyChecklistActivity" />
+        <activity android:name=".ProgressTrackingActivity" />
+        <activity android:name=".AppUsageActivity" />
+        <activity android:name=".DailyScreenTimeActivity" />
+        <activity android:name=".BlockedWebsitesActivity" />
+        <activity android:name=".ActiveBlocksActivity" />
+        <activity android:name=".BlockByCategoryActivity" />
+        <activity android:name=".BlockedAttemptsActivity" />
+        <activity android:name=".AppWiseUsageActivity" />
+        <activity android:name=".AppWiseUsageDetailActivity" />
     </application>
 
 </manifest>

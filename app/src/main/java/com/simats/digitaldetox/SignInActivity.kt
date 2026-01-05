@@ -8,6 +8,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.simats.digitaldetox.network.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -58,12 +59,15 @@ class SignInActivity : AppCompatActivity() {
                                 Toast.makeText(this@SignInActivity, loginResponse?.message ?: "Login failed", Toast.LENGTH_SHORT).show()
                             }
                         } else {
-                            Toast.makeText(this@SignInActivity, "Login failed", Toast.LENGTH_SHORT).show()
+                            val errorBody = response.errorBody()?.string()
+                            android.util.Log.e("DetoxDebug", "Login error: ${response.code()} - $errorBody")
+                            Toast.makeText(this@SignInActivity, "Server error: ${response.code()}", Toast.LENGTH_SHORT).show()
                         }
                     }
 
                     override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                        Toast.makeText(this@SignInActivity, "An error occurred: ${t.message}", Toast.LENGTH_SHORT).show()
+                        android.util.Log.e("DetoxDebug", "Network failure", t)
+                        Toast.makeText(this@SignInActivity, "Network error: ${t.localizedMessage}", Toast.LENGTH_LONG).show()
                     }
                 })
         }
@@ -71,6 +75,10 @@ class SignInActivity : AppCompatActivity() {
         signUpText.setOnClickListener {
             val intent = Intent(this, CreateAccountActivity::class.java)
             startActivity(intent)
+        }
+
+        findViewById<TextView>(R.id.forgot_password_text).setOnClickListener {
+            startActivity(Intent(this, ForgotPasswordActivity::class.java))
         }
     }
 }
